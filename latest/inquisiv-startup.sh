@@ -16,4 +16,3 @@ uwsgi --emperor /etc/uwsgi --logto /var/log/uwsgi.log &
 # Startup nginx
 echo Start nginx
 nginx -g 'daemon off;'
-
