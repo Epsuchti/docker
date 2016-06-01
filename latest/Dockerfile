@@ -81,29 +81,30 @@ RUN echo "import sys" >> /usr/lib/python2.7/sitecustomize.py
 RUN echo "sys.setdefaultencoding('UTF-8')" >> /usr/lib/python2.7/sitecustomize.py
 
 # default
-RUN echo "server {" > /etc/nginx/sites-available/default
-RUN echo "        listen 80 default_server;" >> /etc/nginx/sites-available/default
-RUN echo "        listen [::]:80 default_server ipv6only=on;" >> /etc/nginx/sites-available/default
-RUN echo "        index index.html index.htm;" >> /etc/nginx/sites-available/default
-RUN echo "        server_name localhost;" >> /etc/nginx/sites-available/default
-RUN echo "        location ~* /uploads/ {" >> /etc/nginx/sites-available/default
-RUN echo "                        root /var/inquisiv/web2py/applications/inquisiv/;" >> /etc/nginx/sites-available/default
-RUN echo "        }" >> /etc/nginx/sites-available/default
-RUN echo "        location / {" >> /etc/nginx/sites-available/default
-RUN echo "                        proxy_buffers 8 24k;" >> /etc/nginx/sites-available/default
-RUN echo "                        proxy_buffer_size 2k;" >> /etc/nginx/sites-available/default
-RUN echo "                        proxy_read_timeout 3600;" >> /etc/nginx/sites-available/default
-RUN echo "                        proxy_connect_timeout 3600;" >> /etc/nginx/sites-available/default
-RUN echo "                        proxy_max_temp_file_size 5024m;" >> /etc/nginx/sites-available/default
-RUN echo "                        proxy_send_timeout 3600;" >> /etc/nginx/sites-available/default
-RUN echo "                        uwsgi_read_timeout 3600;" >> /etc/nginx/sites-available/default
-RUN echo "                        uwsgi_send_timeout 3600;" >> /etc/nginx/sites-available/default
-RUN echo "                        uwsgi_pass      unix:///var/inquisiv/tmp/web2py.socket;" >> /etc/nginx/sites-available/default
-RUN echo "                        include         uwsgi_params;" >> /etc/nginx/sites-available/default
-RUN echo "                        uwsgi_param     UWSGI_SCHEME $scheme;" >> /etc/nginx/sites-available/default
-RUN echo "                        uwsgi_param     SERVER_SOFTWARE    nginx/$nginx_version;" >> /etc/nginx/sites-available/default
-RUN echo "        }" >> /etc/nginx/sites-available/default
-RUN echo "}" >> /etc/nginx/sites-available/default
+ADD https://raw.githubusercontent.com/pbuechler/inquisiv/master/latest/default /etc/nginx/sites-available/default
+#RUN echo "server {" > /etc/nginx/sites-available/default
+#RUN echo "        listen 80 default_server;" >> /etc/nginx/sites-available/default
+#RUN echo "        listen [::]:80 default_server ipv6only=on;" >> /etc/nginx/sites-available/default
+#RUN echo "        index index.html index.htm;" >> /etc/nginx/sites-available/default
+#RUN echo "        server_name localhost;" >> /etc/nginx/sites-available/default
+#RUN echo "        location ~* /uploads/ {" >> /etc/nginx/sites-available/default
+#RUN echo "                        root /var/inquisiv/web2py/applications/inquisiv/;" >> /etc/nginx/sites-available/default
+#RUN echo "        }" >> /etc/nginx/sites-available/default
+#RUN echo "        location / {" >> /etc/nginx/sites-available/default
+#RUN echo "                        proxy_buffers 8 24k;" >> /etc/nginx/sites-available/default
+#RUN echo "                        proxy_buffer_size 2k;" >> /etc/nginx/sites-available/default
+#RUN echo "                        proxy_read_timeout 3600;" >> /etc/nginx/sites-available/default
+#RUN echo "                        proxy_connect_timeout 3600;" >> /etc/nginx/sites-available/default
+#RUN echo "                        proxy_max_temp_file_size 5024m;" >> /etc/nginx/sites-available/default
+#RUN echo "                        proxy_send_timeout 3600;" >> /etc/nginx/sites-available/default
+#RUN echo "                        uwsgi_read_timeout 3600;" >> /etc/nginx/sites-available/default
+#RUN echo "                        uwsgi_send_timeout 3600;" >> /etc/nginx/sites-available/default
+#RUN echo "                        uwsgi_pass unix:///var/inquisiv/tmp/web2py.socket;" >> /etc/nginx/sites-available/default
+#RUN echo "                        include uwsgi_params;" >> /etc/nginx/sites-available/default
+#RUN echo "                        uwsgi_param UWSGI_SCHEME $scheme;" >> /etc/nginx/sites-available/default
+#RUN echo "                        uwsgi_param SERVER_SOFTWARE nginx/$nginx_version;" >> /etc/nginx/sites-available/default
+#RUN echo "        }" >> /etc/nginx/sites-available/default
+#RUN echo "}" >> /etc/nginx/sites-available/default
 
 #RUN chown www-data:www-data /var/inquisiv/web2py/* -R -f
 
