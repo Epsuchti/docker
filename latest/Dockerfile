@@ -6,9 +6,9 @@
 FROM ubuntu:14.04
 MAINTAINER pbuechler inquisiv
 
-ENV SVN_URL none
-ENV SVN_USER annonymous
-ENV SVN_PASS empty
+ENV SVN_URL ${SVN_URL}
+ENV SVN_USER ${SVN_USER}
+ENV SVN_PASS ${SVN_PASS}
 
 ################## BEGIN INSTALLATION ######################
 # Install the required tools like python
@@ -119,5 +119,4 @@ ADD https://raw.githubusercontent.com/pbuechler/inquisiv/master/latest/inquisiv-
 #COPY ./inquisiv-startup.sh /
 RUN chmod +x /inquisiv-startup.sh
 
-ENTRYPOINT ["/inquisiv-startup.sh"]
-CMD ["/var/inquisiv", "${SVN_URL}", "${SVN_USER}", "${SVN_PASS}"]
+CMD /inquisiv-startup.sh /var/inquisiv ${SVN_URL} ${SVN_USER} ${SVN_PASS}
