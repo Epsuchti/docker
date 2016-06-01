@@ -1,5 +1,7 @@
 #!/bin/sh
 
+echo Start inquisiv server...
+
 # Checkout svn
 if ! [ -f $1/web2py/applications/inquisiv/models/_config.py ]
 then
