@@ -115,8 +115,9 @@ EXPOSE 443
 
 # Default programms to startup
 
-COPY inquisiv-startup.sh /var/inquisiv/
+ADD https://raw.githubusercontent.com/pbuechler/inquisiv/master/latest/inquisiv-startup.sh /var/inquisiv/
+#COPY inquisiv-startup.sh /var/inquisiv/
+RUN chmod +x /var/inquisiv/inquisiv-startup.sh
+
 ENTRYPOINT ["/var/inquisiv/inquisiv-startup.sh"]
 CMD ["/var/inquisiv", "${SVN_URL}", "${SVN_USER}", "${SVN_PASS}"]
-
-
