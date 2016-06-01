@@ -9,7 +9,7 @@ fi
 
 # Start emperor
 echo Start uwsgi-emperor
-uwsgi --emperor /etc/uwsgi --logto /var/log/uwsgi.log
+uwsgi --emperor /etc/uwsgi --logto /var/log/uwsgi.log &
 
 # Startup nginx
 echo Start nginx

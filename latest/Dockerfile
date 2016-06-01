@@ -48,6 +48,7 @@ RUN apt-get -y install mysql-server-5.6
 ################## UWSGI INSTALLATION ######################
 # Install UWSGI and configure the required config
 
+RUN pip install uwsgi
 RUN mkdir /etc/uwsgi/
 
 # web2py.ini
@@ -81,7 +82,7 @@ RUN echo "import sys" >> /usr/lib/python2.7/sitecustomize.py
 RUN echo "sys.setdefaultencoding('UTF-8')" >> /usr/lib/python2.7/sitecustomize.py
 
 # default
-ADD https://raw.githubusercontent.com/pbuechler/inquisiv/master/latest/default /etc/nginx/sites-available/default
+ADD https://raw.githubusercontent.com/pbuechler/inquisiv/master/latest/default /etc/nginx/site_enabled/default
 #RUN echo "server {" > /etc/nginx/sites-available/default
 #RUN echo "        listen 80 default_server;" >> /etc/nginx/sites-available/default
 #RUN echo "        listen [::]:80 default_server ipv6only=on;" >> /etc/nginx/sites-available/default
