@@ -82,7 +82,7 @@ RUN echo "import sys" >> /usr/lib/python2.7/sitecustomize.py
 RUN echo "sys.setdefaultencoding('UTF-8')" >> /usr/lib/python2.7/sitecustomize.py
 
 # default
-ADD https://raw.githubusercontent.com/pbuechler/inquisiv/master/latest/default /etc/nginx/site_enabled/default
+ADD https://raw.githubusercontent.com/pbuechler/inquisiv/master/latest/default /etc/nginx/sites-enabled/default
 #RUN echo "server {" > /etc/nginx/sites-available/default
 #RUN echo "        listen 80 default_server;" >> /etc/nginx/sites-available/default
 #RUN echo "        listen [::]:80 default_server ipv6only=on;" >> /etc/nginx/sites-available/default
@@ -108,6 +108,11 @@ ADD https://raw.githubusercontent.com/pbuechler/inquisiv/master/latest/default /
 #RUN echo "}" >> /etc/nginx/sites-available/default
 
 #RUN chown www-data:www-data /var/inquisiv/web2py/* -R -f
+
+RUN mkdir /var/inquisiv/tmp/
+
+RUN chmod -R 777 /var/inquisiv/web2py/
+RUN chmod -R 777 /var/inquisiv/tmp/
 
 ##################### INSTALLATION END #####################
 
