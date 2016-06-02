@@ -18,9 +18,9 @@ RUN apt-get update
 # Python
 RUN apt-get -y install python python-dev python-setuptools python-pip
 RUN apt-get -y install libtiff5-dev libjpeg8-dev zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python-tk
-
-# Python modules
-RUN pip install python-magic pillow python-dateutil pytz redis requests requests-toolbelt icalendar
+ 
+# Python modules 
+RUN pip install python-magic pillow python-dateutil pytz redis requests requests-toolbelt icalendar pymysql
 
 RUN apt-get -y install software-properties-common python-software-properties
 
@@ -41,15 +41,7 @@ RUN apt-get -y install subversion
 # Install MySql version 5.6 webserver and import the required db template.
 
 RUN apt-get -y install mysql-server-5.6
-
-RUN service mysql start
-# Create user
-RUN echo "CREATE DATABASE inquisiv; GRANT USAGE ON *.* TO inquisivuser@localhost IDENTIFIED BY '1234'; GRANT ALL PRIVILEGES ON inquisiv.* TO inquisivuser@localhost;" > initdb.sql
-RUN mysql < initdb.sql
-RUN service mysql stop
-
-# Download Starter Database
-
+#DB will be installed in startup script
 
 ################## UWSGI INSTALLATION ######################
 # Install UWSGI and configure the required config
