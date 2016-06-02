@@ -13,6 +13,9 @@ then
 	cp $1/web2py/parameters_8000.py $1/web2py/parameters_80.py	
 fi
 
+# Change web2py password here:
+python -c "from gluon.main import save_password; save_password('1234', 80)"
+
 # Start emperor
 echo "Starting uwsgi-emperor..."
 uwsgi --emperor /etc/uwsgi --logto /var/log/uwsgi.log --uid www-data --gid www-data &

@@ -35,7 +35,6 @@ RUN mkdir /var/inquisiv
 ################## SRC INSTALLATION ######################
 # Install subversion
 
-RUN mkdir /var/inquisiv/web2py/
 RUN apt-get -y install subversion
 
 ################## MySQL INSTALLATION ######################
@@ -84,13 +83,16 @@ RUN echo "sys.setdefaultencoding('UTF-8')" >> /usr/lib/python2.7/sitecustomize.p
 # default
 ADD https://raw.githubusercontent.com/pbuechler/inquisiv/master/latest/default /etc/nginx/sites-enabled/default
 
+##################### INSTALLATION END #####################
+
+# Create folders and add permissions
 RUN mkdir /var/inquisiv/tmp/
+RUN mkdir /var/inquisiv/web2py/
 
 RUN chown -R www-data:www-data /var/inquisiv/web2py/
-RUN chmod -R 777 /var/inquisiv/web2py/
-RUN chmod -R 777 /var/inquisiv/tmp/
-
-##################### INSTALLATION END #####################
+RUN chown -R www-data:www-data /var/inquisiv/tmp/
+RUN chmod -R 777 /var/inquisiv/web2py/*
+RUN chmod -R 777 /var/inquisiv/tmp/*
 
 # Expose ports
 EXPOSE 80
