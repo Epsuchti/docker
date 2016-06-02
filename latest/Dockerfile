@@ -42,8 +42,8 @@ RUN apt-get -y install subversion
 # Install MySql version 5.6 webserver and import the required db template.
 
 RUN apt-get -y install mysql-server-5.6
-#RUN mysql -u root -p
 
+# Download Starter Database
 
 ################## UWSGI INSTALLATION ######################
 # Install UWSGI and configure the required config
@@ -83,34 +83,10 @@ RUN echo "sys.setdefaultencoding('UTF-8')" >> /usr/lib/python2.7/sitecustomize.p
 
 # default
 ADD https://raw.githubusercontent.com/pbuechler/inquisiv/master/latest/default /etc/nginx/sites-enabled/default
-#RUN echo "server {" > /etc/nginx/sites-available/default
-#RUN echo "        listen 80 default_server;" >> /etc/nginx/sites-available/default
-#RUN echo "        listen [::]:80 default_server ipv6only=on;" >> /etc/nginx/sites-available/default
-#RUN echo "        index index.html index.htm;" >> /etc/nginx/sites-available/default
-#RUN echo "        server_name localhost;" >> /etc/nginx/sites-available/default
-#RUN echo "        location ~* /uploads/ {" >> /etc/nginx/sites-available/default
-#RUN echo "                        root /var/inquisiv/web2py/applications/inquisiv/;" >> /etc/nginx/sites-available/default
-#RUN echo "        }" >> /etc/nginx/sites-available/default
-#RUN echo "        location / {" >> /etc/nginx/sites-available/default
-#RUN echo "                        proxy_buffers 8 24k;" >> /etc/nginx/sites-available/default
-#RUN echo "                        proxy_buffer_size 2k;" >> /etc/nginx/sites-available/default
-#RUN echo "                        proxy_read_timeout 3600;" >> /etc/nginx/sites-available/default
-#RUN echo "                        proxy_connect_timeout 3600;" >> /etc/nginx/sites-available/default
-#RUN echo "                        proxy_max_temp_file_size 5024m;" >> /etc/nginx/sites-available/default
-#RUN echo "                        proxy_send_timeout 3600;" >> /etc/nginx/sites-available/default
-#RUN echo "                        uwsgi_read_timeout 3600;" >> /etc/nginx/sites-available/default
-#RUN echo "                        uwsgi_send_timeout 3600;" >> /etc/nginx/sites-available/default
-#RUN echo "                        uwsgi_pass unix:///var/inquisiv/tmp/web2py.socket;" >> /etc/nginx/sites-available/default
-#RUN echo "                        include uwsgi_params;" >> /etc/nginx/sites-available/default
-#RUN echo "                        uwsgi_param UWSGI_SCHEME $scheme;" >> /etc/nginx/sites-available/default
-#RUN echo "                        uwsgi_param SERVER_SOFTWARE nginx/$nginx_version;" >> /etc/nginx/sites-available/default
-#RUN echo "        }" >> /etc/nginx/sites-available/default
-#RUN echo "}" >> /etc/nginx/sites-available/default
-
-#RUN chown www-data:www-data /var/inquisiv/web2py/* -R -f
 
 RUN mkdir /var/inquisiv/tmp/
 
+RUN chown -R www-data:www-data /var/inquisiv/web2py/
 RUN chmod -R 777 /var/inquisiv/web2py/
 RUN chmod -R 777 /var/inquisiv/tmp/
 
@@ -120,10 +96,11 @@ RUN chmod -R 777 /var/inquisiv/tmp/
 EXPOSE 80
 EXPOSE 443
 
-# Default programms to startup
+# Add Volume
+VOLUME /var/inquisiv/
 
+# Default programm to startup
 ADD https://raw.githubusercontent.com/pbuechler/inquisiv/master/latest/inquisiv-startup.sh /
-#COPY ./inquisiv-startup.sh /
 RUN chmod +x /inquisiv-startup.sh
 
 CMD /inquisiv-startup.sh /var/inquisiv ${SVN_URL} ${SVN_USER} ${SVN_PASS}
