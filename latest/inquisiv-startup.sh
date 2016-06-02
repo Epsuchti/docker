@@ -21,8 +21,8 @@ echo "Starting uwsgi-emperor..."
 uwsgi --emperor /etc/uwsgi --logto /var/log/uwsgi.log --uid www-data --gid www-data &
 
 # Change web2py password here:
-echo "Change web2py password"
-(cd $WORKSPACE/web2py/ & python -c "from gluon.main import save_password; save_password('1234', 80)")
+#echo "Change web2py password"
+#(cd $WORKSPACE/web2py/ & python -c "from gluon.main import save_password; save_password('1234', 80)")
 
 # Permissions
 echo "Adding permissions"
