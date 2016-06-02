@@ -14,7 +14,7 @@ then
 	
 	echo "Adding permissions"
 	chmod -R 777 /var/inquisiv/web2py/*
-	chmod -R 777 /var/inquisiv/tmp/*
+	chmod -R 777 /var/inquisiv/tmp/
 fi
 
 # Change web2py password here:
