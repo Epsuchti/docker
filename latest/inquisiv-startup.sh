@@ -14,16 +14,15 @@ then
 	
 	echo "Adding permissions"
 	chmod -R 777 /var/inquisiv/web2py/*
-	chmod -R 777 /var/inquisiv/tmp/*
 fi
-
-# Change web2py password here:
-cd $1/web2py/
-python -c "from gluon.main import save_password; save_password('1234', 80)"
 
 # Start emperor
 echo "Starting uwsgi-emperor..."
 uwsgi --emperor /etc/uwsgi --logto /var/log/uwsgi.log --uid www-data --gid www-data &
+
+# Change web2py password here:
+cd $1/web2py/
+python -c "from gluon.main import save_password; save_password('1234', 80)"
 
 # Startup nginx
 echo "Starting nginx..."

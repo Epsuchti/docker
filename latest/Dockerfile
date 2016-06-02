@@ -85,12 +85,14 @@ ADD https://raw.githubusercontent.com/pbuechler/inquisiv/master/latest/default /
 
 ##################### INSTALLATION END #####################
 
-# Create folders and add owner
+# Create folders and add owner/permissions
 RUN mkdir /var/inquisiv/tmp/
 RUN mkdir /var/inquisiv/web2py/
 
 RUN chown -R www-data:www-data /var/inquisiv/web2py/
 RUN chown -R www-data:www-data /var/inquisiv/tmp/
+RUN chmod -R 777 /var/inquisiv/web2py/
+RUN chmod -R 777 /var/inquisiv/tmp/
 
 # Expose ports
 EXPOSE 80
