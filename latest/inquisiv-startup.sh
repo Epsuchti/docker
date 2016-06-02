@@ -14,10 +14,6 @@ then
 	
 	echo "Adding permissions"
 	chmod -R 777 /var/inquisiv/web2py/*
-<<<<<<< HEAD
-=======
-	chmod -R 777 /var/inquisiv/tmp/
->>>>>>> 83811cb5429f8648af5b1a0670b2382a93363664
 fi
 
 # Start emperor
