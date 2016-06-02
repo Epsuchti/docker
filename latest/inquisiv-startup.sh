@@ -11,9 +11,6 @@ then
 	echo "Checkout SVN"
 	svn checkout $2 $1/web2py/ --username $3 --password $4 --non-interactive --trust-server-cert
 	cp $1/web2py/parameters_8000.py $1/web2py/parameters_80.py
-	
-	echo "Adding permissions"
-	chmod -R 777 /var/inquisiv/web2py/*
 fi
 
 # Start emperor
@@ -21,8 +18,13 @@ echo "Starting uwsgi-emperor..."
 uwsgi --emperor /etc/uwsgi --logto /var/log/uwsgi.log --uid www-data --gid www-data &
 
 # Change web2py password here:
-cd $1/web2py/
-python -c "from gluon.main import save_password; save_password('1234', 80)"
+echo "Change web2py password"
+(cd $1/web2py/ & python -c "from gluon.main import save_password; save_password('1234', 80)")
+
+# Permissions
+echo "Adding permissions"
+chmod -R 777 /var/inquisiv/web2py/*
+chmod -R 777 /var/inquisiv/tmp/*
 
 # Startup nginx
 echo "Starting nginx..."
