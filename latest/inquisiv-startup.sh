@@ -8,11 +8,11 @@ service mysql start
 mysql -uroot -e "IF NOT EXISTS ( SELECT name FROM sys.databases WHERE name = 'inquisiv' ) CREATE DATABASE inquisiv;"
 
 # Checkout svn and import database
-if [ ! -f $1/web2py/applications/inquisiv/models/_config.py ]
+if [ ! -f /var/inquisiv/web2py/applications/inquisiv/models/_config.py ]
 then
 	echo "Checkout SVN"
-	svn checkout $2 $1/web2py/ --username $3 --password $4 --non-interactive --trust-server-cert
-	cp $1/web2py/parameters_8000.py $1/web2py/parameters_80.py
+	svn checkout $2 /var/inquisiv/web2py/ --username $3 --password $4 --non-interactive --trust-server-cert
+	cp /var/inquisiv/web2py/parameters_8000.py /var/inquisiv/web2py/parameters_80.py
 	echo "Source code downloaded."
 	echo "You need to edit _config.py now"
 fi
