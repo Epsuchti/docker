@@ -6,7 +6,8 @@ export WORKSPACE
 echo "Start inquisiv server..."
 
 #echo "Starting MySql..."
-#mysqld_safe --init-file=$1/mysql-init.sql &
+echo "Start mySql service..."
+service mysql start
 
 # Checkout svn and import database
 if [ ! -f $WORKSPACE/web2py/applications/inquisiv/models/_config.py ]
@@ -27,7 +28,6 @@ uwsgi --emperor /etc/uwsgi --logto /var/log/uwsgi.log --uid www-data --gid www-d
 # Permissions
 echo "Adding permissions"
 chmod -R 777 /var/inquisiv/web2py/*
-chmod -R 777 /var/inquisiv/tmp/*
 
 # Startup nginx
 echo "Starting nginx..."

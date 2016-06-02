@@ -42,7 +42,14 @@ RUN apt-get -y install subversion
 
 RUN apt-get -y install mysql-server-5.6
 
+RUN service mysql start
+# Create user
+RUN echo "CREATE DATABASE inquisiv; GRANT USAGE ON *.* TO inquisivuser@localhost IDENTIFIED BY '1234'; GRANT ALL PRIVILEGES ON inquisiv.* TO inquisivuser@localhost;" > initdb.sql
+RUN mysql < initdb.sql
+RUN service mysql stop
+
 # Download Starter Database
+
 
 ################## UWSGI INSTALLATION ######################
 # Install UWSGI and configure the required config
@@ -97,9 +104,10 @@ RUN chmod -R 777 /var/inquisiv/tmp/
 # Expose ports
 EXPOSE 80
 EXPOSE 443
+EXPOSE 3306
 
 # Add Volume
-VOLUME /var/inquisiv/
+VOLUME /var/inquisiv/vol/
 
 # Default programm to startup
 ADD https://raw.githubusercontent.com/pbuechler/inquisiv/master/latest/inquisiv-startup.sh /
