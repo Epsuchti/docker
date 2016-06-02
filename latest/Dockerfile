@@ -105,4 +105,4 @@ VOLUME /var/inquisiv/vol/
 ADD https://raw.githubusercontent.com/pbuechler/inquisiv/master/latest/inquisiv-startup.sh /
 RUN chmod +x /inquisiv-startup.sh
 
-CMD /inquisiv-startup.sh /var/inquisiv ${SVN_URL} ${SVN_USER} ${SVN_PASS}
+CMD /inquisiv-startup.sh ${SVN_URL} ${SVN_USER} ${SVN_PASS}

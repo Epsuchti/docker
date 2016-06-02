@@ -5,13 +5,26 @@ echo "Start inquisiv server..."
 #echo "Starting MySql..."
 echo "Start mySql service..."
 service mysql start
-mysql -uroot -e "IF NOT EXISTS ( SELECT name FROM sys.databases WHERE name = 'inquisiv' ) CREATE DATABASE inquisiv;"
 
 # Checkout svn and import database
 if [ ! -f /var/inquisiv/web2py/applications/inquisiv/models/_config.py ]
 then
+	# Create DB
+	echo "Create Inquisiv DB"
+	mysql -uroot -e "CREATE DATABASE inquisiv;"
+
+	# Import Base Data
+	echo "Import master data"
+	mysql -uroot < /var/inquisiv/web2py/database/inquisiv_db.sql
+	mysql -uroot < /var/inquisiv/web2py/database/master_data.sql
+	mysql -uroot < /var/inquisiv/web2py/database/page_data.sql
+	mysql -uroot < /var/inquisiv/web2py/database/grid_list.sql
+	mysql -uroot < /var/inquisiv/web2py/database/list_category_list_entry.sql
+	
+	# Checkout SVN
 	echo "Checkout SVN"
-	svn checkout $2 /var/inquisiv/web2py/ --username $3 --password $4 --non-interactive --trust-server-cert
+	svn checkout $1 /var/inquisiv/web2py/ --username $2 --password $3 --non-interactive --trust-server-cert
+	
 	cp /var/inquisiv/web2py/parameters_8000.py /var/inquisiv/web2py/parameters_80.py
 	echo "Source code downloaded."
 	echo "You need to edit _config.py now"
