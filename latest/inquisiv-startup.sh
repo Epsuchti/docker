@@ -1,16 +1,19 @@
 #!/bin/sh
 
+WORKSPACE=$1
+export WORKSPACE
+
 echo "Start inquisiv server..."
 
 #echo "Starting MySql..."
 #mysqld_safe --init-file=$1/mysql-init.sql &
 
 # Checkout svn and import database
-if [ ! -f $1/web2py/applications/inquisiv/models/_config.py ]
+if [ ! -f $WORKSPACE/web2py/applications/inquisiv/models/_config.py ]
 then
 	echo "Checkout SVN"
-	svn checkout $2 $1/web2py/ --username $3 --password $4 --non-interactive --trust-server-cert
-	cp $1/web2py/parameters_8000.py $1/web2py/parameters_80.py
+	svn checkout $2 $WORKSPACE/web2py/ --username $3 --password $4 --non-interactive --trust-server-cert
+	cp $WORKSPACE/web2py/parameters_8000.py $WORKSPACE/web2py/parameters_80.py
 fi
 
 # Start emperor
@@ -19,7 +22,7 @@ uwsgi --emperor /etc/uwsgi --logto /var/log/uwsgi.log --uid www-data --gid www-d
 
 # Change web2py password here:
 echo "Change web2py password"
-(cd $1/web2py/ & python -c "from gluon.main import save_password; save_password('1234', 80)")
+(cd $WORKSPACE/web2py/ & python -c "from gluon.main import save_password; save_password('1234', 80)")
 
 # Permissions
 echo "Adding permissions"
