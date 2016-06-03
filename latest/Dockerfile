@@ -20,10 +20,10 @@ RUN apt-get update
 
 # Python
 RUN apt-get -y install python python-dev python-setuptools python-pip
-RUN apt-get -y install libtiff5-dev libjpeg8-dev zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python-tk -t /var/inquisiv/web2py/site-packages
+RUN apt-get -y install libtiff5-dev libjpeg8-dev zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python-tk
  
 # Python modules 
-RUN pip install python-magic pillow python-dateutil pytz redis requests requests_toolbelt icalendar pymysql
+RUN pip install python-magic pillow python-dateutil pytz redis requests requests_toolbelt icalendar pymysql -t /var/inquisiv/web2py/site-packages
 
 RUN apt-get -y install software-properties-common python-software-properties
 
