@@ -11,7 +11,7 @@ if [ ! -f /var/inquisiv/web2py/applications/inquisiv/models/_config.py ]
 then
 	# Checkout SVN
 	echo "Checkout SVN"
-	svn checkout $1 /var/inquisiv/web2py/ --username $2 --password $3 --non-interactive --trust-server-cert
+	svn checkout $1 /var/inquisiv/web2py/ --username $2 --password $3 --non-interactive --trust-server-cert -q
 	
 	cp /var/inquisiv/web2py/parameters_8000.py /var/inquisiv/web2py/parameters_80.py
 	echo "Source code downloaded."
