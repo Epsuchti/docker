@@ -93,6 +93,9 @@ RUN chown -R www-data:www-data /var/inquisiv/tmp/
 RUN chmod -R 777 /var/inquisiv/web2py/
 RUN chmod -R 777 /var/inquisiv/tmp/
 
+#Update PythonPath
+RUN export PYTHONPATH=/var/inquisiv/web2py/
+
 # Expose ports
 EXPOSE 80
 EXPOSE 443
