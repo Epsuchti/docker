@@ -23,11 +23,11 @@ then
 
 	# Import Base Data
 	echo "Import master data"
-	mysql -uroot < /var/inquisiv/web2py/database/inquisiv_db.sql
-	mysql -uroot < /var/inquisiv/web2py/database/master_data.sql
-	mysql -uroot < /var/inquisiv/web2py/database/page_data.sql
-	mysql -uroot < /var/inquisiv/web2py/database/grid_list.sql
-	mysql -uroot < /var/inquisiv/web2py/database/list_category_list_entry.sql
+	mysql -uroot inquisiv < /var/inquisiv/web2py/database/inquisiv_db.sql
+	mysql -uroot inquisiv < /var/inquisiv/web2py/database/master_data.sql
+	mysql -uroot inquisiv < /var/inquisiv/web2py/database/page_data.sql
+	mysql -uroot inquisiv < /var/inquisiv/web2py/database/grid_list.sql
+	mysql -uroot inquisiv < /var/inquisiv/web2py/database/list_category_list_entry.sql
 fi
 
 # Start emperor
