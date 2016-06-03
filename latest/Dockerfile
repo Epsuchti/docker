@@ -10,6 +10,8 @@ ENV SVN_URL ${SVN_URL}
 ENV SVN_USER ${SVN_USER}
 ENV SVN_PASS ${SVN_PASS}
 
+# Create workspaces
+RUN mkdir /var/inquisiv
 RUN mkdir /var/inquisiv/tmp/
 RUN mkdir /var/inquisiv/web2py/
 
@@ -31,9 +33,6 @@ RUN apt-get -y install software-properties-common python-software-properties
 #RUN add-apt-repository ppa:webupd8team/java -y # Doesn't accept the -y argument, need a solution.
 #RUN apt-get update
 #RUN apt-get -y install oracle-java8-installer
-
-# Create workspace
-RUN mkdir /var/inquisiv
 
 ################## SRC INSTALLATION ######################
 # Install subversion
