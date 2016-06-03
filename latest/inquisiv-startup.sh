@@ -34,6 +34,10 @@ fi
 echo "Starting uwsgi-emperor..."
 uwsgi --emperor /etc/uwsgi --logto /var/log/uwsgi.log --uid www-data --gid www-data &
 
+# Set PythonPath
+echo "Set PythonPath"
+export PYTHONPATH=/var/inquisiv/web2py/site-packages
+
 # Change web2py password here:
 echo "Change web2py password"
 (cd /var/inquisiv/web2py/ && python -c "from gluon.main import save_password; save_password('1234', 80)")
