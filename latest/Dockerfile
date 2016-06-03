@@ -17,10 +17,10 @@ RUN apt-get update
 
 # Python
 RUN apt-get -y install python python-dev python-setuptools python-pip
-RUN apt-get -y install libtiff5-dev libjpeg8-dev zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python-tk
+RUN apt-get -y install libtiff5-dev libjpeg8-dev zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python-tk -t /var/inquisiv/web2py/site-packages
  
 # Python modules 
-RUN pip install python-magic pillow python-dateutil pytz redis requests requests-toolbelt icalendar pymysql
+RUN pip install python-magic pillow python-dateutil pytz redis requests requests_toolbelt icalendar pymysql
 
 RUN apt-get -y install software-properties-common python-software-properties
 
@@ -93,8 +93,8 @@ RUN chown -R www-data:www-data /var/inquisiv/tmp/
 RUN chmod -R 777 /var/inquisiv/web2py/
 RUN chmod -R 777 /var/inquisiv/tmp/
 
-#Update PythonPath
-RUN export PYTHONPATH=/var/inquisiv/web2py/
+# Update PythonPath
+RUN export PYTHONPATH=/var/inquisiv/web2py/site-packages
 
 # Expose ports
 EXPOSE 80
